@@ -310,9 +310,9 @@ def pert_time_evol(w):
     Finding peaks:
 
     calculating w[i] manually
-    w[i]=i*2*pi/(n*dt)
-    n*dt=numosc*2*pi/w
-    w[i]=i*w/numosc
+    w[i] = i*2*pi/(n*dt)
+    n*dt = numosc*2*pi/w
+    w[i] = i*w/numosc
     For multiples of w, 2w , 3w... Mw etc
     Peak indices, I=M*numosc
     constructing three peaks for I, I+1, I-1
@@ -322,20 +322,20 @@ def pert_time_evol(w):
     """
     ####################################################################################################33333
     ########################################################################################################33
-    tp=12####total peaks
-    peak_indices=np.arange(0,3*tp+2)*num_osc
-    peak_indices[0:tp+1]=np.arange(0,tp+1)*num_osc
-    peak_indices[tp+1:2*tp+2]=np.arange(0,tp+1)*num_osc+1
-    peak_indices[2*tp+2:3*tp+2]=np.arange(1,tp+1)*num_osc-1
+    tp = 12####total peaks
+    peak_indices = np.arange(0,3*tp+2)*num_osc
+    peak_indices[0 : tp+1] = np.arange(0,tp+1)*num_osc
+    peak_indices[tp+1:2*tp+2] = np.arange(0,tp+1)*num_osc+1
+    peak_indices[2*tp+2:3*tp+2] = np.arange(1,tp+1)*num_osc-1
     peak_index   = peak_indices.reshape(1,peak_indices.shape[0],1)
 
-    ft_amp = y_fft[:,:,peak_index]
-    ft_w = w_fft[:,:,peak_index]
-    ft_ph = ph_fft[:,:,peak_index]
+    ft_amp = y_fft[:, :, peak_index]
+    ft_w = w_fft[:, :, peak_index]
+    ft_ph = ph_fft[:, :, peak_index]
     ft_amp = ft_amp.reshape(ft_amp.shape[0],ft_amp.shape[3],1)
     ft_w = ft_w.reshape(ft_w.shape[0],ft_w.shape[3],1)
     ft_ph = ft_ph.reshape(ft_ph.shape[0],ft_ph.shape[3],1)
-    ft_amp[:,0,:] = ft_amp[:,0,:]/2
+    ft_amp[:, 0, :] = ft_amp[:, 0, :]/2
 
     force_ifft = np.sum(driving_force(ft_amp, ft_w, ft_ph, t),axis=1)
 
@@ -366,9 +366,9 @@ t_i = time()
 w_sweep = np.linspace(w0_res-delta, w0_res+delta, num_points_w)
 
 # All variables are (Nw x Nt) 2D arrays
-t_23= time()
+t_23 = time()
 t, z0, z_corr, force, force_ift = pert_time_evol(w_sweep)
-t_32=time()
+t_32 = time()
 # Calculate steady state solution with interaction
 z = z0 + z_corr
 
@@ -383,7 +383,7 @@ w_res   = w_sweep[res_idx]
 res_amp = amplitudes[res_idx]
 
 
-# Calculate shift in resonance frequency fue to interaction
+# Calculate shift in resonance frequency due to interaction
 delta_w     = w_res - w0_res
 percent_w   = (delta_w / w0_res) * 100
 
@@ -479,10 +479,10 @@ print("-------------------------------------------------------")
 
 
 #============================================================================
-### Plotting Oscillations with and without interaction at resonace
+### Plotting Oscillations with and without interaction at resonance
 
 print("-------------------------------------------------------")
-print("## Plotting Oscillations with and without interaction at resonace")
+print("## Plotting Oscillations with and without interaction at resonance")
 
 t_i = time()
 
@@ -566,7 +566,7 @@ print("Plot Time: ", plot_time)
 print("-------------------------------------------------------")
 
 #============================================================================
-### Show the genrated Plots
+### Show the generated Plots
 
 plt.tight_layout()
 plt.show()
